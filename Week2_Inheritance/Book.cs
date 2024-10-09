@@ -4,19 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//Access Modifiers:
-
-//public - is the least restrictive one. it makes the component accessible from everywhere
-//private - is the most restrictive one. it makes the component accessible only from the class where it is declared
-//protected - it makes the component accessible from the class where it is declared and also from any inherited classes
-//internal - it makes the component accessible from inside the same library /project/ namespace
-
-
-
-namespace Week2_Classes
+namespace Week2_Inheritance
 {
     //enum are predefined sets which you cannot dynamically modify
-    public enum GenreType {Horror=1, Fiction=2, SciFi=3, None=4 }
+    public enum GenreType { Horror = 1, Fiction = 2, SciFi = 3, None = 4 }
 
     //a class is  a representation of an entity, which is often referred to as a template
     public class Book
@@ -40,16 +31,11 @@ namespace Week2_Classes
         }
 
 
-
-
-
-
-
         //Fields:
         //fields are the containers where data is actually stored
         private string name;
         private string author;
-        private bool available;
+        protected bool available;
 
         //the properties are the characteristics that make up the book
         //through properties we can GET or SET values
@@ -68,8 +54,10 @@ namespace Week2_Classes
             }
         }
 
-        public string Author { 
-            get {
+        public string Author
+        {
+            get
+            {
                 string masked = "";
                 for (int i = 0; i < author.Length; i++)
                 {
@@ -77,8 +65,9 @@ namespace Week2_Classes
                 }
                 return masked;
             }
-            
-            set => author = value; }
+
+            set => author = value;
+        }
 
 
         public int Year { get; set; }
@@ -88,10 +77,14 @@ namespace Week2_Classes
 
         public List<string> HistoryOfIdsThatBorrowedTheBook { get; set; }
 
-        public bool Available { get {
+        public bool Available
+        {
+            get
+            {
                 return available;
-            }  }
-   
+            }
+        }
+
 
         //methods:
         //are the behavour of a Book

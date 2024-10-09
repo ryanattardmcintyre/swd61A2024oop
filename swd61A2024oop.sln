@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Week1_Introduction", "Week1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week2_Classes", "Week2_Classes\Week2_Classes.csproj", "{A99078DD-2EEC-4306-91CF-7E255300E287}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week2_Inheritance", "Week2_Inheritance\Week2_Inheritance.csproj", "{AAD7431B-B1E7-4620-B23E-F9B26A38F146}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A99078DD-2EEC-4306-91CF-7E255300E287}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A99078DD-2EEC-4306-91CF-7E255300E287}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A99078DD-2EEC-4306-91CF-7E255300E287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD7431B-B1E7-4620-B23E-F9B26A38F146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD7431B-B1E7-4620-B23E-F9B26A38F146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD7431B-B1E7-4620-B23E-F9B26A38F146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD7431B-B1E7-4620-B23E-F9B26A38F146}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -26,11 +26,20 @@ namespace Week2_Inheritance
 
         }
 
-        public Journal(string isbn, int issueNo) : base(isbn) //runs the constructor declared inside the same class
+        public Journal(string isbn, int issueNo, int month) : base(isbn) //runs the constructor declared inside the same class
         {
+            Month = month;
             IssueNo = issueNo;
         }
 
+
+        public override void Print()
+        {
+            base.Print(); //this will execute Book.Print()
+            Console.Write($" Issue No: {IssueNo}, Month: {new DateTime(Year, Month, 1).ToString("MMMM")}");
+
+
+        }
 
 
 

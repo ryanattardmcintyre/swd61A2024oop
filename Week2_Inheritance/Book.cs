@@ -104,5 +104,12 @@ namespace Week2_Inheritance
         }
 
 
+        //virtual: enables the method it marks to be re-implemented in the inherited classes
+        //         it enables dynamic polymorphism
+        public virtual void Print()
+        {
+            Console.WriteLine($"Name: {Name}, Year: {Year}, Author: {Author}");
+        }
+
     }
 }

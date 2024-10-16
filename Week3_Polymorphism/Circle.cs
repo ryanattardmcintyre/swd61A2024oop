@@ -11,7 +11,7 @@ namespace Week3_Polymorphism
      * [3D] Sphere > Circle. int z; FindPerimeter(), FindArea(), FindVolume()
      * [3D] Cylinder > Sphere. int z, double height; FindPerimeter(), FindArea(), FindVolume()
      */
-    public class Circle: Point
+    public class Circle: Point //circle is a point
     {
         public double Radius { get; set; }
 
@@ -20,7 +20,7 @@ namespace Week3_Polymorphism
             return Math.PI * Radius * 2;
         }
 
-        public virtual double FindArea()
+        public override double FindArea()
         {
             return Math.PI * Radius * Radius;
             //return Math.PI * Math.Pow(Radius, 2);

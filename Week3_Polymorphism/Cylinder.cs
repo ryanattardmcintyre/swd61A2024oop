@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Week3_Polymorphism
 {
-    public class Cylinder: Sphere
+    public class Cylinder: Sphere //cylinder is a sphere
     {
         public double Height { get; set; }
         public override double FindArea()

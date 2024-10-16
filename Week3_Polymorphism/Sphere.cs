@@ -20,7 +20,7 @@ C = 2πr
 Surface area of a sphere:
 A = 4πr2
  */
-    public class Sphere : Circle
+    public class Sphere : Circle //sphere is a circle
     {
         public int Z { get; set; }
         public override double FindPerimeter()

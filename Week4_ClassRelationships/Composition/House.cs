@@ -10,7 +10,7 @@ namespace Week4_ClassRelationships.Composition
     {
         //A house cannot be instantiated
         //UNLESS you first instantiate a Room
-        //a pass it as a parameter in the constructor
+        //and pass it as a parameter in the constructor
         //of House
         public House(Room r) {
             Rooms = new List<Room>();

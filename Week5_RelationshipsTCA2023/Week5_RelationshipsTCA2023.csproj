@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3CD06729-0C4D-429A-A23F-424AB4C6D9BF}</ProjectGuid>
+    <ProjectGuid>{CC55ABE6-701A-4A99-ADC0-6E450E51BB24}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Week4_ClassRelationships</RootNamespace>
-    <AssemblyName>Week4_ClassRelationships</AssemblyName>
+    <RootNamespace>Week5_RelationshipsTCA2023</RootNamespace>
+    <AssemblyName>Week5_RelationshipsTCA2023</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,14 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregation\Item.cs" />
-    <Compile Include="Aggregation\ShoppingCart.cs" />
-    <Compile Include="Association\FileHandler.cs" />
-    <Compile Include="Association\TextFile.cs" />
-    <Compile Include="Composition\House.cs" />
-    <Compile Include="Composition\Room.cs" />
+    <Compile Include="Airline.cs" />
+    <Compile Include="Flight.cs" />
+    <Compile Include="Passenger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ticket.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

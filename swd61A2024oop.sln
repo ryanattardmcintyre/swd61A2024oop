@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week4_Worksheet6", "Week4_W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week4_ClassRelationships", "Week4_ClassRelationships\Week4_ClassRelationships.csproj", "{3CD06729-0C4D-429A-A23F-424AB4C6D9BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week5_RelationshipsTCA2023", "Week5_RelationshipsTCA2023\Week5_RelationshipsTCA2023.csproj", "{CC55ABE6-701A-4A99-ADC0-6E450E51BB24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{3CD06729-0C4D-429A-A23F-424AB4C6D9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CD06729-0C4D-429A-A23F-424AB4C6D9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CD06729-0C4D-429A-A23F-424AB4C6D9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC55ABE6-701A-4A99-ADC0-6E450E51BB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC55ABE6-701A-4A99-ADC0-6E450E51BB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC55ABE6-701A-4A99-ADC0-6E450E51BB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC55ABE6-701A-4A99-ADC0-6E450E51BB24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,7 +20,7 @@ namespace Week3_Polymorphism
             return Math.PI * Radius * 2;
         }
 
-        public double FindArea()
+        public virtual double FindArea()
         {
             return Math.PI * Radius * Radius;
             //return Math.PI * Math.Pow(Radius, 2);

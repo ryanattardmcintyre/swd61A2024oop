@@ -13,6 +13,8 @@ namespace Week5_DataLayer
     {
         public DbSet<Book> Books { get; set; } //this list will be converted into a database table
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,3 +34,4 @@ namespace Week5_DataLayer
         }
     }
 }
+

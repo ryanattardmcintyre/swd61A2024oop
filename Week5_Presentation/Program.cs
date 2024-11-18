@@ -26,16 +26,26 @@ Console.WriteLine("Database has been created (if it didn't already exist).");
 
 
 //Code that will actually keeps on being repeated depending on the selection of the user
+Console.WriteLine("1. Books");
+Console.WriteLine("2. Reservations");
+Console.WriteLine("3. Members");
+// this needs some restructuring
+
 Console.WriteLine("1. See a list of books");
 Console.WriteLine("2. Search book");
 Console.WriteLine("3. List book reservations history");
-
-Console.WriteLine("4. Add a book");
-Console.WriteLine("5. Update a book");
-Console.WriteLine("6. Delete a book");
-
+Console.WriteLine("4. Add a book - requires admin login");
+Console.WriteLine("5. Update a book - requires admin login");
+Console.WriteLine("6. Delete a book - requires admin login");
 Console.WriteLine("7. Top 5 that have been borrowed the most");
 Console.WriteLine("8. Top 5 users that have borrowed the most");
+
+Console.WriteLine("1. Reserve a book - requires log in");
+Console.WriteLine("2. Return a book");
+
+Console.WriteLine("1. Add member");
+Console.WriteLine("2. See list of books borrowed by member");
+
 
 
 

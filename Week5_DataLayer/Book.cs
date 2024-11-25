@@ -11,6 +11,7 @@ namespace Week5_DataLayer
     public class Book
     {
         [Key]//that the underneath property becomes the primary key
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Isbn { get; set; }
         public string Name { get; set; }
 

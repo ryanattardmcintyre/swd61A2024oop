@@ -23,5 +23,14 @@ namespace Week5_BusinessLogic
             return _libraryDbContext.Categories.ToList();
         }
 
+
+        //Exercise
+        //if one needs to manage Categories details dynamically....then you need to implement
+        //hint: look at how we did AddBook()...inside the BooksRepository
+
+        //-AddCategory(Category c){}
+        //-UpdateCateogry(Category c){}
+        //-DeleteCategory(int id){}
+
     }
 }

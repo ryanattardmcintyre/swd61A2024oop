@@ -46,19 +46,18 @@ do
         case 1: //Books management
             int menu1Choice = 0;
             Console.WriteLine("1. See a list of books");
-            Console.WriteLine("2. Search book");
-            Console.WriteLine("3. List book reservations history");
+            Console.WriteLine("2. Search book by name");
+            Console.WriteLine("3. Search book by category"); 
             Console.WriteLine("4. Add a book - requires admin login");
             Console.WriteLine("5. Update a book - requires admin login");
             Console.WriteLine("6. Delete a book - requires admin login");
-            Console.WriteLine("7. Top 5 that have been borrowed the most");
-            Console.WriteLine("8. Top 5 users that have borrowed the most");
+          
             menu1Choice = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
 
             switch (menu1Choice)
             {
-                case 1:
+                case 1://getting a list of books
                     var list = myBooksRepository.GetAllBooks();
                     Console.WriteLine("List of Books: " + list.Count);
 
@@ -74,23 +73,59 @@ do
 
                     break;
 
-                case 2:
-                  
-                  //  var list = myBooksRepository.GetAllBooks("keyword");
+                case 2: //Search Book
+
+                    Console.Clear();
+                    Console.WriteLine("What do you want to search for? ");
+                    string keyword = Console.ReadLine();
+                    var searchedBooksList = myBooksRepository.GetAllBooks(keyword);
+
+                    Console.WriteLine();
+                    foreach (var book in searchedBooksList)
+                    {
+                        Console.WriteLine($"Isbn: {book.Isbn}, Name: {book.Name}");
+                    }
+
+                    Console.WriteLine();
+                    Console.WriteLine("Press a key to continue to the main menu...");
+                    Console.ReadKey();
+
 
                     break;
 
                 case 3:
+                    Console.Clear();
+                    Console.WriteLine("Which category you would like to list books of?");
+                    var myCategoriesForSearch = myCategoriesRepository.GetCategories();
+                    foreach (var c in myCategoriesForSearch)
+                    {
+                        Console.WriteLine($"{c.Id}. {c.Name}");
+                    }
+
+
+                    int selectedCategory = Convert.ToInt32(Console.ReadLine());
+                    var searchedBooksListCase3 = myBooksRepository.GetAllBooks(selectedCategory);
+
+                    Console.WriteLine();
+                    foreach (var book in searchedBooksListCase3)
+                    {
+                        Console.WriteLine($"Isbn: {book.Isbn}, Name: {book.Name}");
+                    }
+
+                    Console.WriteLine();
+                    Console.WriteLine("Press a key to continue to the main menu...");
+                    Console.ReadKey();
+
+
                     break;
 
-                case 4:
+                case 4: //Adding a book
                     Book myBook = new Book();
                     Console.WriteLine("Input isbn:");
                     myBook.Isbn = Convert.ToInt32(Console.ReadLine());
 
                     Console.WriteLine("Input name:");
                     myBook.Name = Console.ReadLine();
-
                      
                     Console.WriteLine("Input category:");
                     var myCategories = myCategoriesRepository.GetCategories();
@@ -109,24 +144,75 @@ do
 
                     break;
 
-                case 5:
+                case 5: //Update a book
+                    Book myBookToBeUpdated = new Book();
+                    Console.WriteLine("Input isbn of the book you would like to update:");
+                    myBookToBeUpdated.Isbn = Convert.ToInt32(Console.ReadLine());
+
+                    if (myBooksRepository.GetBook(myBookToBeUpdated.Isbn) == null)
+                    {
+                        Console.WriteLine("This isbn doesn't exist in our database");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Input name:");
+                        myBookToBeUpdated.Name = Console.ReadLine();
+
+                        Console.WriteLine("Input category:");
+                        var myCategoriesForUpdate = myCategoriesRepository.GetCategories();
+                        foreach (var c in myCategoriesForUpdate)
+                        {
+                            Console.WriteLine($"{c.Id}. {c.Name}");
+                        }
+
+                        myBookToBeUpdated.CategoryFK = Convert.ToInt32(Console.ReadLine());
+                        myBooksRepository.UpdateBook(myBookToBeUpdated);
+
+                        Console.WriteLine();
+                        Console.WriteLine("Book updated into the db...");
+                    }
+                 
+                    Console.WriteLine("Press a key to continue to the main menu...");
+                    Console.ReadKey();
+
                     break;
 
-                case 6:break;
-                case 7:break;
-                case 8:break;
+                case 6: //Deleting a book
+
+                    Console.Clear();
+                    Console.WriteLine("Input isbn of book to delete");
+                    //suggestion: check whether isbn exists before deleting.
+
+                    myBooksRepository.DeleteBook(Convert.ToInt32(Console.ReadLine()));
+
+                    Console.WriteLine("Book was deleted...");
+
+                    Console.WriteLine("Press a key to continue to the main menu...");
+                    Console.ReadKey();
+
+
+                    break;
+ 
             }
 
             break;
 
-        case 2: //Reservations management
-            Console.WriteLine("1. Reserve a book - requires log in");
-            Console.WriteLine("2. Return a book");
+        case 2: //Reservations management - stats (hint: we have to use group by)
+            Console.WriteLine("1. Show No. of Reservations per Category");
+            Console.WriteLine("2. Show No. Of Reservations per Month");
+            Console.WriteLine("3. Show No. Of Reservations per Month per Category");
+            Console.WriteLine("4. List History of Reservations For All Users");
+            Console.WriteLine("5. List History of Reservations For All Users For a Given Year");
+            Console.WriteLine("6. Top 5 books that have been borrowed the most");
+            Console.WriteLine("7. Top 5 users that have borrowed the most books");
             break;
 
         case 3: //Members Management
-            Console.WriteLine("1. Add member");
-            Console.WriteLine("2. See list of books borrowed by member");
+            Console.WriteLine("1. Register");
+            Console.WriteLine("2. Login");
+            Console.WriteLine("3. See list of books borrowed by member");
+            Console.WriteLine("4. Borrow a book");
+            
 
             break;
         }

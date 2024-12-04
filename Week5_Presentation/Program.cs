@@ -27,8 +27,11 @@ Console.WriteLine("Database has been created (if it didn't already exist).");
 
 BooksRepository myBooksRepository = new BooksRepository(dbContext);
 CategoriesRepository myCategoriesRepository = new CategoriesRepository(dbContext);
+MembersRepository myMembersRepository = new MembersRepository(dbContext);
 
 //Code that will actually keeps on being repeated depending on the selection of the user
+
+string authenticatedUsername = "";
 
 int mainMenuChoice = 0;
 do
@@ -212,7 +215,88 @@ do
             Console.WriteLine("2. Login");
             Console.WriteLine("3. See list of books borrowed by member");
             Console.WriteLine("4. Borrow a book");
-            
+            Console.WriteLine("5. Get how many books per month were rented by member for a specific year");
+            Console.WriteLine("6. Get the avg no of books borrowed per category throughout the years");
+            //e.g. in 2023 - Science 10 books
+            //e.g. in 2024 - Science 20 books
+            // avg = 15
+
+            int menu3Choice = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
+
+            switch (menu3Choice)
+            {
+                case 1:
+
+                    Member newMember = new Member();
+                    Console.WriteLine("Input username");
+                    newMember.Username = Console.ReadLine();
+                    Console.WriteLine("Input password");
+                    newMember.Password = ReadPassword();
+
+                    Console.WriteLine("Input first name");
+                    newMember.FirstName = Console.ReadLine();
+                    
+                    Console.WriteLine("Input last name");
+                    newMember.LastName = Console.ReadLine();
+
+                    myMembersRepository.Register(newMember);
+                    Console.WriteLine("Registration complete");
+
+                    Console.WriteLine("Press a key to continue to the main menu...");
+                    Console.ReadKey();
+
+                    break;
+
+                case 2:
+
+                    Console.WriteLine("Input username");
+                    string username = Console.ReadLine();
+                    
+                    Console.WriteLine("Input password");
+                    string password = ReadPassword();
+
+                    bool authentication =myMembersRepository.Login(username, password);
+                    if (authentication == true)
+                    {
+                        //the user logged in successfully ...
+                        authenticatedUsername = username;
+                        Console.WriteLine("Logged in successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid log in");
+                    }
+                    break;
+
+                case 3:
+
+                    if (authenticatedUsername == "")
+                    {
+                        Console.WriteLine("Access denied");
+                    }
+                    else
+                    {
+                        var borrowedBooks = myMembersRepository.GetBooks(authenticatedUsername);
+                        Console.WriteLine("*********** Borrowed Books so far ***********");
+                        Console.WriteLine();
+                        foreach (var book in borrowedBooks)
+                        {
+                            Console.WriteLine($"Isbn: {book.Isbn}, Name: {book.Name}");
+                        }
+
+                        Console.WriteLine();
+                        Console.WriteLine("Press a key to continue to the main menu...");
+                        Console.ReadKey();
+                    }
+
+                    break;
+
+                case 4:
+                    break;
+            }
+
+
 
             break;
         }
@@ -234,3 +318,39 @@ Console.ReadKey();
 
 
 Console.ReadKey();
+
+
+
+
+
+
+
+
+//this needs to be pasted in the internal class Program
+static string ReadPassword()
+{
+    string password = string.Empty;
+    ConsoleKey key;
+
+    do
+    {
+        var keyInfo = Console.ReadKey(intercept: true); // Read a key without displaying it
+        key = keyInfo.Key;
+
+        if (key == ConsoleKey.Backspace && password.Length > 0)
+        {
+            // Remove the last character from the password and the console
+            password = password[0..^1];
+            Console.Write("\b \b"); // Move back, overwrite with space, and move back again
+        }
+        else if (!char.IsControl(keyInfo.KeyChar))
+        {
+            // Append the character to the password and display a masking character
+            password += keyInfo.KeyChar;
+            Console.Write("*");
+        }
+    }
+    while (key != ConsoleKey.Enter); // Continue until Enter is pressed
+
+    return password;
+}

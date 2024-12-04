@@ -25,6 +25,10 @@ namespace Week5_DataLayer
             //TrustServerCertificate (may be necessary)
 
             optionsBuilder.UseSqlServer(@"Server=LAPTOP-O0I9A16V\SQLEXPRESS;Database=SWD61A2024LibraryDb;Trusted_Connection=True;");
+
+
+            optionsBuilder.UseLazyLoadingProxies(); //if you don't enable this, navigational properties are not populated with
+                                                    //data from child/parent tables automatically
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

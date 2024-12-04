@@ -293,6 +293,37 @@ do
                     break;
 
                 case 4:
+                    Console.Clear();
+                    if (authenticatedUsername == "")
+                    {
+                        Console.WriteLine("Access denied");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Borrowing a book....");
+                        Console.WriteLine("Which book? input isbn");
+                        int isbnOfBookToBorrow = Convert.ToInt32(Console.ReadLine());
+
+                        Reservation myReservation = new Reservation();
+                        myReservation.BookFK = isbnOfBookToBorrow;
+                        myReservation.MemberFK = authenticatedUsername;
+
+                        Console.WriteLine("Specify the days you intend to keep the book");
+
+                        myReservation.DaysBookedFor = Convert.ToInt32(Console.ReadLine());
+
+                        //in db
+                        //book 1001 -> 1/12/2024 for 7 days
+
+                        myMembersRepository.BorrowABook(myReservation);
+                        Console.WriteLine("Book was reserved. come and collect it. you need to return the book on the " +
+                            (DateTime.Now.AddDays(myReservation.DaysBookedFor).ToShortDateString()));
+
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine("Press a key to continue to the main menu...");
+                    Console.ReadKey();
+
                     break;
             }
 

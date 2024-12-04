@@ -84,14 +84,17 @@ namespace Week5_BusinessLogic
             r.DateBooked= DateTime.Now;
 
             //checking that the book to borrow is actually available
+            bool isBookAvailable = true;
+            //1/12/2024 +7 days = 8/12/2024
+            //4/12/2024
+            int count = _libraryDbContext.Reservations.Count(x => x.BookFK == r.BookFK && x.DateBooked.AddDays(x.DaysBookedFor) > r.DateBooked);
 
-
-            if (condition1 == false)
+            if (count <= 0) //means that book is available
             {
                      _libraryDbContext.Reservations.Add(r);
                     _libraryDbContext.SaveChanges();  
             }
-            else
+            else //book is not available
             {
                 throw new Exception("Book is not available");
             }

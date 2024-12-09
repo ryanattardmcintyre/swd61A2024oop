@@ -25,9 +25,13 @@ var dbContext = scope.ServiceProvider.GetRequiredService<LibraryDbContext>();
 dbContext.Database.EnsureCreated();
 Console.WriteLine("Database has been created (if it didn't already exist).");
 
+
+//its a centralized place where to instantiate these repository classes which will allow us to call methods 
+//that query or write data from and to the database withouth creating any extra/unneeded instances
 BooksRepository myBooksRepository = new BooksRepository(dbContext);
 CategoriesRepository myCategoriesRepository = new CategoriesRepository(dbContext);
 MembersRepository myMembersRepository = new MembersRepository(dbContext);
+ReservationsRepository myReservationsRepository = new ReservationsRepository(dbContext);
 
 //Code that will actually keeps on being repeated depending on the selection of the user
 
@@ -208,6 +212,42 @@ do
             Console.WriteLine("5. List History of Reservations For All Users For a Given Year");
             Console.WriteLine("6. Top 5 books that have been borrowed the most");
             Console.WriteLine("7. Top 5 users that have borrowed the most books");
+
+            Console.WriteLine("input choice");
+            int case2_choice = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
+            switch(case2_choice)
+            {
+                case 1:
+                    var listOfRervationsPerCategory = myReservationsRepository.GetTotalReservationsPerCategory();
+
+                    Console.WriteLine("Category\t\t\t\tTotal Reservations");
+                    Console.WriteLine();
+                    foreach (var item in listOfRervationsPerCategory)
+                    {
+                        Console.WriteLine($"{item.CategoryTitle}\t\t\t\t{item.TotalReservations}");
+                    }
+
+
+                    break;
+
+                case 2:
+                    var listOfRervationsPerMonth = myReservationsRepository.GetTotalReservationsPerMonth();
+
+                    Console.WriteLine("Month\t\t\t\tTotal Reservations");
+                    Console.WriteLine();
+                    foreach (var item in listOfRervationsPerMonth)
+                    {
+                        Console.WriteLine($"{item.Month}\t\t\t\t{item.TotalReservations}");
+                    }
+
+                    break; ;
+            }
+
+            Console.WriteLine("Press a key to continue to the main menu...");
+            Console.ReadKey();
+
+
             break;
 
         case 3: //Members Management

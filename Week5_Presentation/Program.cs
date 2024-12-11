@@ -241,7 +241,43 @@ do
                         Console.WriteLine($"{item.Month}\t\t\t\t{item.TotalReservations}");
                     }
 
-                    break; ;
+                    break;  
+
+                case 6:
+
+                    Console.Clear();
+                    Console.WriteLine("Top 5 Most Reserved Books");
+                    Console.WriteLine();
+
+                    Console.WriteLine("Book Title\t\t\t\tTotal Reservations");
+                    Console.WriteLine();
+
+                    var case2_6 = myReservationsRepository.GetTop5BorrowedBooks();
+                    foreach (var item in case2_6)
+                    {
+                        Console.WriteLine($"{item.BookTitle}\t\t\t\t{item.TotalReservations}");
+                    }
+
+                    break;
+
+                case 7:
+
+                    Console.Clear();
+                    Console.WriteLine("Top 5 Most Active Members");
+                    Console.WriteLine();
+
+                    Console.WriteLine("Members\t\t\t\tTotal Reservations");
+                    Console.WriteLine();
+
+                    var case2_7 = myReservationsRepository.GetTop5MembersThatMadeTheMostReservations();
+                    foreach (var item in case2_7)
+                    {
+                        Console.WriteLine($"{item.MemberUsername}\t\t\t\t{item.TotalReservations}");
+                    }
+                    break;
+
+
+
             }
 
             Console.WriteLine("Press a key to continue to the main menu...");

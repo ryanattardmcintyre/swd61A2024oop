@@ -100,15 +100,71 @@ namespace Week5_BusinessLogic
 
        // Console.WriteLine("6. Top 5 books that have been borrowed the most");
 
-        public List<Book> GetTop5BorrowedBooks()
-        { }
+        public List<BooksReservationsViewModel> GetTop5BorrowedBooks()
+        {
+            //a) to get all the reservations 
+            //b) to group by the Book/ Book Isbn
+            //c) to Select Book
+            //d) sorting: OrderByDescending the Count of Reservations
+            //e) var list = ....;    return list.Take(5);
+
+             var list = _libraryDbContext.Reservations 
+                  .GroupBy(x => new {Name= x.Book.Name, Isbn = x.Book.Isbn } ) //we are not allowed to group by a class data type
+                  .Select(x => new BooksReservationsViewModel()
+                  {
+                      BookTitle =  x.Key.Name,
+                      TotalReservations = x.Count()
+                  })
+                  .OrderByDescending(x => x.TotalReservations)
+                  .Take(5)
+                  .ToList();
+            return list;
+        }
 
 
 
         //    Console.WriteLine("7. Top 5 users that have borrowed the most books");
 
-        public List<Member> GetTop5Members()
-        { }
+        public List<MembersReservationsViewModel> GetTop5MembersThatMadeTheMostReservations()
+        {
+
+            //a) to get all the reservations 
+            //b) to group by the MemberFK
+            //c) to Select Member
+            //d) sorting: OrderByDescending the Count of Reservations
+            //e) var list = ....;    return list.Take(5);
+
+
+            /*
+             * Date | Member | Book
+             * 
+             * group 1
+             * 1st  | joe | 1
+             * 2nd  | joe | 2
+             * 3rd  | joe | 3
+             * 
+             * group 2
+             * 1st | tom | 10
+             * 1st | tom | 11
+             * 
+             */ 
+
+
+            var list = _libraryDbContext.Reservations
+              .GroupBy(x => x.Member.Username) //since we are not allowed to group by an entire Member object....
+              .Select(x => new MembersReservationsViewModel()
+              {
+                  MemberUsername = x.Key, //consequently this changes as well
+                  TotalReservations = x.Count()
+              })
+              .OrderByDescending(x => x.TotalReservations)
+              .Take(5)
+              .ToList();
+
+            return list;
+
+
+        }
 
 
 

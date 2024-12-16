@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Week5_BusinessLogic;
+using Microsoft.Data.SqlClient;
+using Week5_BusinessLogic.Exceptions;
 
 //code under this comment goes inside the Main (if you have a Main method)
 
@@ -127,25 +129,55 @@ do
                     break;
 
                 case 4: //Adding a book
-                    Book myBook = new Book();
-                    Console.WriteLine("Input isbn:");
-                    myBook.Isbn = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine("Input name:");
-                    myBook.Name = Console.ReadLine();
-                     
-                    Console.WriteLine("Input category:");
-                    var myCategories = myCategoriesRepository.GetCategories();
-                    foreach (var c in myCategories)
+                    try
                     {
-                        Console.WriteLine($"{c.Id}. {c.Name}");
+                        Book myBook = new Book();
+                        Console.WriteLine("Input isbn:");
+                        myBook.Isbn = Convert.ToInt32(Console.ReadLine());
+
+                        Console.WriteLine("Input name:");
+                        myBook.Name = Console.ReadLine();
+
+                        Console.WriteLine("Input category:");
+                        var myCategories = myCategoriesRepository.GetCategories();
+                        foreach (var c in myCategories)
+                        {
+                            Console.WriteLine($"{c.Id}. {c.Name}");
+                        }
+
+                        myBook.CategoryFK = Convert.ToInt32(Console.ReadLine());
+                        myBooksRepository.AddBook(myBook);
+
+                        Console.WriteLine();
+                        Console.WriteLine("Book added into the db...");
+                    }
+                    //catch //is not going to help the developer nor the user
+                    //{
+                    //    Console.WriteLine("there was an error");
+                    //}
+                    catch (CategoryNotFoundException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    catch (FormatException ex)
+                    {
+                        //log ex.Message + ex.StackTrace
+
+                        Console.WriteLine("Check your inputs. An invalid input was keyed in.  Isbn must be a number, Category must be a number");
+                    }
+                    catch (SqlException ex)
+                    {
+                        //log ex.Message + ex.StackTrace
+                        Console.WriteLine("Category must be a number between 1 and 2 or connection was lost. try again later");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        string message = ex.Message; //Log the message into the db
+                        Console.WriteLine("There was an error, try again later");
                     }
 
-                    myBook.CategoryFK = Convert.ToInt32(Console.ReadLine());
-                    myBooksRepository.AddBook(myBook);
-                    
-                    Console.WriteLine();
-                    Console.WriteLine("Book added into the db...");
                     Console.WriteLine("Press a key to continue to the main menu...");
                     Console.ReadKey();
 
@@ -415,14 +447,6 @@ Console.ReadKey();
 
 
 // this needs some restructuring
-
-
-
-
-
-
-
-
 
 Console.ReadKey();
 

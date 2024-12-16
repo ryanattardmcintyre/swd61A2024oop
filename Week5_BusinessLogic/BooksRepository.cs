@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Week5_DataLayer;
+using Week5_BusinessLogic.Exceptions;
 
 namespace Week5_BusinessLogic
 {
@@ -38,6 +39,13 @@ namespace Week5_BusinessLogic
         //SaveChanges at the end commits the changes to the database
         public void AddBook(Book book) {
             
+            if(_libraryDbContext.Categories.SingleOrDefault(x=>x.Id == book.CategoryFK) == null
+                )
+            {
+                //error: category input is not valid
+                throw new CategoryNotFoundException();
+            }
+
             _libraryDbContext.Books.Add(book);
             _libraryDbContext.SaveChanges();
 

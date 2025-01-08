@@ -35,7 +35,7 @@ namespace Week11_SimpleDesktopApp
             {
                 MessageBox.Show("Access allowed"); //its like Console.WriteLine()
 
-                Form2 myForm2 = new Form2(_dbContext);
+                Form2 myForm2 = new Form2(_dbContext, username);
                 //creating _dbContext as a field globally in this class was a wise choice because now we can use it everywhere when needed
                 //and consequently we are using ALWAYS the same database
                 myForm2.Show();

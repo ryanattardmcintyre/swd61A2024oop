@@ -202,10 +202,72 @@ namespace Week11_SimpleDesktopApp
             myReservation.DateBooked = DateTime.Now;
 
             //dtpReturnDate.Value
+            myReservation.DaysBookedFor = dtpReturnDate.Value.Subtract(DateTime.Now).Days;
 
             //cmbBooks.SelectedValue.ToString()
+            myReservation.BookFK = Convert.ToInt32(cmbBooks.SelectedValue);
 
-            
+            myReservation.MemberFK = _username;
+
+            MembersRepository membersRepository = new MembersRepository(_dbContext);
+            membersRepository.BorrowABook(myReservation);
+
+            MessageBox.Show("Reservation noted - you may look it up in your history");
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string isbnSelected = dataGridView1.SelectedCells[0].Value.ToString();
+
+
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                // Get the first selected row
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                // Retrieve a value from a specific column (e.g., "ColumnName")
+                var cellValue = selectedRow.Cells["Isbn"].Value;
+
+                cmbBooks.SelectedValue= Convert.ToInt32(cellValue);
+            }
+        }
+
+        private void historyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReservationsRepository reservationsRepository = new ReservationsRepository(_dbContext);
+            var list = reservationsRepository.GetReservationsForMember(_username);
+
+
+            var displayList = from r in list
+                              select new
+                              {
+                                  Isbn = r.BookFK,
+                                  Title = r.Book.Name,
+                                  BookedOn = r.DateBooked.ToShortDateString(),
+                                  ReturnOn = r.DateBooked.AddDays(r.DaysBookedFor)
+
+                              };
+
+            dataGridView2.DataSource = displayList.ToList();
+
+
+            foreach (var ctrl in this.Controls) //looping in all the controls that were dragged and dropped on THIS form
+            {
+                if (ctrl.GetType() == typeof(GroupBox)) //checking the type of control
+                {
+                    ((GroupBox)ctrl).Visible = false; //typecasting ctrl (of type object) into a GroupBox, immediately we're hiding it
+                }
+            }
+
+            grpHistory.Dock = DockStyle.Fill;
+            grpHistory.Visible = true;
+            grpHistory.Location = new Point(12, 46);
+
 
         }
     }

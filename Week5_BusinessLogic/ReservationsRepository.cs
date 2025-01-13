@@ -35,6 +35,12 @@ namespace Week5_BusinessLogic
         //Fiction        | 5 
         //Science        | 3
 
+
+        public List<Reservation> GetReservationsForMember(string username)
+        {
+            return _libraryDbContext.Reservations.Where(x => x.MemberFK == username).OrderByDescending(x=>x.DateBooked).ToList();
+        }
+
         public List<CategoryReservationsViewModel> GetTotalReservationsPerCategory()
         {
             //group by

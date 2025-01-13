@@ -81,13 +81,30 @@ namespace Week5_BusinessLogic
         //BooksRepository/ ReservationsRepository
         public void BorrowABook(Reservation r)
         {
+            DateTime newReservationBookingTime = r.DateBooked;
+            DateTime newReservationReturningTime = r.DateBooked.AddDays(r.DaysBookedFor);
+               
+
+
             r.DateBooked= DateTime.Now;
 
             //checking that the book to borrow is actually available
             bool isBookAvailable = true;
             //1/12/2024 +7 days = 8/12/2024
             //4/12/2024
-            int count = _libraryDbContext.Reservations.Count(x => x.BookFK == r.BookFK && x.DateBooked.AddDays(x.DaysBookedFor) > r.DateBooked);
+            int count = _libraryDbContext.Reservations.Count(x => x.BookFK == r.BookFK && 
+            (
+            (newReservationBookingTime < x.DateBooked && newReservationReturningTime > x.DateBooked.AddDays(x.DaysBookedFor)) //c
+            ||
+            (newReservationBookingTime < x.DateBooked.AddDays(x.DaysBookedFor) && newReservationReturningTime > x.DateBooked.AddDays(x.DaysBookedFor)) //b
+            ||
+            (newReservationBookingTime < x.DateBooked && newReservationReturningTime > x.DateBooked) //a
+            ||
+           (newReservationBookingTime > x.DateBooked && newReservationReturningTime < x.DateBooked.AddDays(x.DaysBookedFor)) //b
+            )
+            );
+
+
 
             if (count <= 0) //means that book is available
             {

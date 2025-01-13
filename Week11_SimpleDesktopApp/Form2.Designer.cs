@@ -62,12 +62,16 @@
             this.dtpReturnDate = new System.Windows.Forms.DateTimePicker();
             this.btnReserveBook = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.grpHistory = new System.Windows.Forms.GroupBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.grpAddBook.SuspendLayout();
             this.grpListBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.grpDeleteBook.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.grpAddReservation.SuspendLayout();
+            this.grpHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // grpAddBook
@@ -195,6 +199,8 @@
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(847, 429);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // grpDeleteBook
             // 
@@ -244,7 +250,7 @@
             this.reservationsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1717, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1709, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -314,15 +320,16 @@
             // placeAReservationToolStripMenuItem
             // 
             this.placeAReservationToolStripMenuItem.Name = "placeAReservationToolStripMenuItem";
-            this.placeAReservationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.placeAReservationToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.placeAReservationToolStripMenuItem.Text = "Place a reservation";
             this.placeAReservationToolStripMenuItem.Click += new System.EventHandler(this.placeAReservationToolStripMenuItem_Click);
             // 
             // historyToolStripMenuItem
             // 
             this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            this.historyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.historyToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.historyToolStripMenuItem.Text = "History";
+            this.historyToolStripMenuItem.Click += new System.EventHandler(this.historyToolStripMenuItem_Click);
             // 
             // grpAddReservation
             // 
@@ -382,11 +389,34 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Select Book";
             // 
+            // grpHistory
+            // 
+            this.grpHistory.Controls.Add(this.dataGridView2);
+            this.grpHistory.Location = new System.Drawing.Point(714, 620);
+            this.grpHistory.Name = "grpHistory";
+            this.grpHistory.Size = new System.Drawing.Size(968, 376);
+            this.grpHistory.TabIndex = 5;
+            this.grpHistory.TabStop = false;
+            this.grpHistory.Text = "History";
+            this.grpHistory.Visible = false;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(3, 23);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 29;
+            this.dataGridView2.Size = new System.Drawing.Size(962, 350);
+            this.dataGridView2.TabIndex = 0;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1717, 694);
+            this.ClientSize = new System.Drawing.Size(1709, 1008);
+            this.Controls.Add(this.grpHistory);
             this.Controls.Add(this.grpAddReservation);
             this.Controls.Add(this.grpDeleteBook);
             this.Controls.Add(this.grpListBooks);
@@ -406,6 +436,8 @@
             this.menuStrip1.PerformLayout();
             this.grpAddReservation.ResumeLayout(false);
             this.grpAddReservation.PerformLayout();
+            this.grpHistory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,5 +479,7 @@
         private DateTimePicker dtpReturnDate;
         private Label label5;
         private ComboBox cmbBooks;
+        private GroupBox grpHistory;
+        private DataGridView dataGridView2;
     }
 }
